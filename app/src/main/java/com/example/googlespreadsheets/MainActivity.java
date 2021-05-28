@@ -46,6 +46,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -173,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
 
             signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
-                    .requestScopes(new Scope(DriveScopes.DRIVE_FILE)).build();
+                    .requestScopes(new Scope(DriveScopes.DRIVE_FILE))
+                    .build();
 
             client = GoogleSignIn.getClient(this, signInOptions);
 
@@ -187,12 +189,11 @@ public class MainActivity extends AppCompatActivity {
                 credential = GoogleAccountCredential.usingOAuth2(
                         getApplicationContext(), Arrays.asList(SCOPES))
                         .setBackOff(new ExponentialBackOff())
-                        .setSelectedAccountName(settings.getString(PREF_ACCOUNT_NAME, account.getEmail()));
-
+                        .setSelectedAccount(new Account(account.getEmail(), "com.example.googlespreadsheets"));
 
                 mService = new com.google.api.services.drive.Drive.Builder(
                         transport, jsonFactory, credential)
-                        .setApplicationName("Google Spreadsheets")
+                        .setApplicationName("Google Spreadsheet")
                         .build();
 
             }else {
@@ -384,7 +385,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 AndroidHttp.newCompatibleTransport(),
                                 new GsonFactory(),
-                                credential).setApplicationName("Google Spreadsheets").build();
+                                credential).setApplicationName("Google Spreadsheet").build();
 
                         Thread GettingGoogleSheets= new Thread(){
 

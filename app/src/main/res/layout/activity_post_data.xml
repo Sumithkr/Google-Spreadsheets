@@ -15,7 +15,22 @@
         android:textSize="25dp"
         android:text="Fill Your Entries"/>
 
-    <EditText
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <LinearLayout
+            android:id="@+id/parentLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--<EditText
         android:id="@+id/name"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -46,7 +61,7 @@
         android:paddingLeft="20dp"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
